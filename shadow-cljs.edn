@@ -1,0 +1,31 @@
+{:nrepl {:port 8777}
+
+ :source-paths ["src" "test" "dev"]
+
+ :dependencies
+ [[reagent "1.1.0"]
+  [re-frame "1.2.0"]
+  [girouette "0.0.7"]
+  [girouette/processor "RELEASE"]
+  [binaryage/devtools "1.0.4"]]
+
+ :build-defaults
+ {:build-hooks [(hooks/compile-css)]}
+
+ :dev-http
+ {8280 "resources/public"
+  8290 "target/browser-test"}
+
+ :builds
+ {:app
+  {:target     :browser
+   :output-dir "resources/public/js/compiled"
+   :asset-path "/js/compiled"
+   :modules
+   {:app {:init-fn girouette-issue-90.core/init}}
+   :devtools
+   {:preloads []}
+   :dev
+   {:compiler-options
+    {:closure-defines
+     {}}}}}}
